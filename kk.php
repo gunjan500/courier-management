@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <link rel="stylesheet" href="kk1.css">
+</head>
+<body>
+<div class="banner">
+    <div class="navbar">
+        <img src="logo.jpg" alt="" class="logo">
+        <ul>
+            <li><a href="flex.html">Home</a></li>
+            
+            <li><a href="logout.php">Log out</a></li>
+        </ul>
+    </div>
+</div>
+<centre>
+  <div class="bb">
+        <h3>Please enter your booking id to know your booking details</h3>
+        </div>
+    <div class="container">
+        <form action="" method="POST">
+            <input type="text" name="tracking_id" placeholder="Enter your Booking_id">
+            <input type="Submit" name="search"  class = "btn" value="Search by id">
+</form>
+</div>
+<div class="aa">
+<table class="content-table">
+  
+  <?php
+ 
+  $db=mysqli_connect("localhost","root","",'tours');
+
+  if(isset($_POST['search']))
+  {
+      $tracking_id=$_POST['tracking_id'];
+
+      $query="SELECT*FROM order_reg where tracking_id='$tracking_id' ";
+      $query_run=mysqli_query($db,$query);
+       
+     
+          ?>
+          <thead>
+    <tr>
+      <th scope="col">Order status</th>
+      <th scope="col">Senders name</th>
+      <th scope="col">Recievers name</th>
+      <th scope="col">Recievers phone no.</th>
+      <th scope="col">Recievers address</th>
+      <th scope="col">Recievers postal code</th>
+    
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+         if(mysqli_num_rows($query_run)>0)
+     
+         {
+           while($row=mysqli_fetch_array($query_run))
+         
+           {
+    ?>
+          <tr>
+              <td> <?php echo $row['order_status'];?></td>
+              <td> <?php echo $row['n1'];?></td>
+              <td> <?php echo $row['n2'];?></td>
+              <td> <?php echo $row['p2'];?></td>
+              <td> <?php echo $row['a2'];?></td>
+              <td> <?php echo $row['c2'];?></td>
+              
+      </tr>
+      <?php
+      }
+    }
+
+  }
+  ?>
+</table>
+</div>               
+                    
+                
+                    
+                  
+            
+    
+</body>
+</html>
